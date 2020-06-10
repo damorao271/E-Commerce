@@ -8,7 +8,7 @@ const users = require("./routes/users");
 // Puertos y URL
 const uri = process.env.ATLAS_URI;
 const localhost = process.env.LOCAL_HOST;
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 // Routes
 
