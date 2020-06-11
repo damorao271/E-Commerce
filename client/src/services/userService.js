@@ -3,8 +3,15 @@ require("dotenv").config();
 
 let apiEndPoint = process.env.SERVER_URL + "/users";
 
-apiEndPoint = "http://localhost:3900/users";
+// apiEndPoint = "http://localhost:3900/users";
 
-export async function getTypes() {
-  return http.get(apiEndPoint);
+apiEndPoint = "https://e-commerce-mern-power.herokuapp.com/users";
+
+export async function getUser() {
+  try {
+    const { data } = await http.get(apiEndPoint);
+    return data;
+  } catch (error) {
+    return error;
+  }
 }

@@ -1,12 +1,12 @@
 import React from "react";
-import { getTypes } from "./services/userService";
+import { getUser } from "./services/userService";
 
 class App extends React.Component {
   state = {};
 
   componentDidMount = async () => {
-    const { data } = await getTypes();
-    console.log(data);
+    const data = await getUser();
+    console.log("Data", data);
   };
 
   render() {
