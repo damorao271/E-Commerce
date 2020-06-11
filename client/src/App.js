@@ -1,5 +1,8 @@
 import React from "react";
+import "./FontAwesome/index";
 import { getUser } from "./services/userService";
+import Header from "./components/header";
+import Footer from "./components/footer";
 
 class App extends React.Component {
   state = {};
@@ -10,7 +13,12 @@ class App extends React.Component {
   };
 
   render() {
-    return <div className="App">Hola</div>;
+    return (
+      <div className="App">
+        <Header />
+        <Footer />
+      </div>
+    );
   }
 }
 

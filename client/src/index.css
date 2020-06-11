@@ -1,13 +1,82 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.navbar {
+  padding: 0px;
+}
+
+.sc-nav {
+  display: flex;
+  flex-flow: row;
+  border: 1px solid black;
+}
+.sc-nav div {
+  border: 1px solid black;
+}
+
+.sc-nav div:nth-child(1) {
+  width: 80%;
+}
+
+.sc-nav div:nth-child(2) {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  width: 10%;
+  transition: all 300ms;
+}
+
+.sc-nav div:nth-child(2) h5 {
+  margin-bottom: 0px;
+  transition: all 300ms;
+}
+
+.sc-nav div:nth-child(2):hover {
+  cursor: pointer;
+}
+
+.sc-nav div:nth-child(2):hover h5 {
+  transform: scale(1.05, 1.05);
+}
+
+.sc-nav div:nth-child(2) h6 {
+  margin-left: 5px;
+  margin-bottom: 0px;
+  transition: all 300ms;
+}
+
+.sc-nav div:nth-child(3) {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  width: 10%;
+}
+
+.sc-nav div:nth-child(3) h6 {
+  margin-left: 5px;
+  margin-bottom: 0px;
+}
+
+.sc-icon {
+  color: gray;
+  font-size: 20px;
+  transition: all 300ms;
 }
