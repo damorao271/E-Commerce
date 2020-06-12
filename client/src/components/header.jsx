@@ -1,10 +1,14 @@
 import React, { Component } from "react";
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { NavLink } from "react-router-dom";
 
 class Header extends Component {
-  state = {};
   render() {
+    const { counter } = this.props;
+
+    console.log("Counter", counter);
+
     return (
       <React.Fragment>
         <div className="sc-nav">
@@ -19,51 +23,50 @@ class Header extends Component {
           </div>
           <div>
             <FontAwesomeIcon className="sc-icon" icon="shopping-bag" />
-            <h6>0</h6>
+            <h6>{counter}</h6>
           </div>
         </div>
         <Navbar expand="lg">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="m-auto">
-              <NavDropdown title="MEN" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
-              </NavDropdown>
-              <NavDropdown title="WOMEN" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
-              </NavDropdown>
-              <NavDropdown title="UNISEX" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              </NavDropdown>
-              <NavDropdown title="TROOPS" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              </NavDropdown>
-              <NavDropdown title="SOUVENIRS" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              </NavDropdown>
-              <NavDropdown title="SALES" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              </NavDropdown>
+              <div>
+                <NavLink to="/">
+                  <h5>HOME</h5>
+                </NavLink>
+              </div>
+              <div>
+                <NavLink to="/collections/men">
+                  <h5>MEN</h5>
+                </NavLink>
+              </div>
+              <div>
+                <NavLink to="/collections/women">
+                  <h5>WOMEN</h5>
+                </NavLink>
+              </div>
+
+              <div>
+                <NavLink to="/collections/unisex">
+                  <h5>UNISEX</h5>
+                </NavLink>
+              </div>
+
+              <div>
+                <NavLink to="/collections/troops">
+                  <h5>TROOPS</h5>
+                </NavLink>
+              </div>
+              <div>
+                <NavLink to="/collections/souvenirs">
+                  <h5> SOUVENIRS </h5>
+                </NavLink>
+              </div>
+              <div>
+                <NavLink to="/collections/sales">
+                  <h5>SALES</h5>
+                </NavLink>
+              </div>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
