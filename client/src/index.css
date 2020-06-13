@@ -17,6 +17,80 @@ code {
     monospace;
 }
 
+.col-1,
+.col-10,
+.col-11,
+.col-12,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-auto,
+.col-lg,
+.col-lg-1,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-lg-auto,
+.col-md,
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-auto,
+.col-sm,
+.col-sm-1,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-sm-auto,
+.col-xl,
+.col-xl-1,
+.col-xl-10,
+.col-xl-11,
+.col-xl-12,
+.col-xl-2,
+.col-xl-3,
+.col-xl-4,
+.col-xl-5,
+.col-xl-6,
+.col-xl-7,
+.col-xl-8,
+.col-xl-9,
+.col-xl-auto {
+  /* padding: 0px; */
+  margin: 0px;
+  border: 1px solid black;
+}
+
 .navbar {
   padding: 0px;
 }
@@ -87,7 +161,7 @@ code {
 
 /* Gender */
 
-.gender-container div:first-child {
+.gender-img {
   width: 100%;
   height: 400px;
   background-color: gray;
@@ -96,8 +170,94 @@ code {
   align-items: center;
 }
 
-.gender-container div h5 {
+.gender-img h5 {
   text-transform: uppercase;
   font-size: 50px;
   color: white;
+}
+
+.card-display {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.card-container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.product-info {
+  /* background-color: cadetblue; */
+}
+
+.sizes-container {
+  width: 30%;
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-start;
+}
+
+.sizes-container div {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+  border: solid black 1px;
+  text-transform: uppercase;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.related-items-first {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.related-items-container {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+}
+
+.card-button-container {
+}
+.count-buttons {
+  border: solid gray 1px;
+  border-radius: 6px;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+.count-buttons div {
+  align-items: center;
+  text-align: center;
+  width: 60px;
+}
+
+/* Login */
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+#login-form {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
 }

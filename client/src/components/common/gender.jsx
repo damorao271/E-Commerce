@@ -1,18 +1,65 @@
 import React, { Component } from "react";
-import Card from "./card";
+import CardDisplay from "./cardDisplay";
+import { DropdownButton, Dropdown } from "react-bootstrap";
+import { NavLink, Switch, Route } from "react-router-dom";
+import _ from "lodash";
 
 class Gender extends Component {
-  state = {};
-
   render() {
-    const title = this.props.match.params.gender;
+    let { products, gender, colors, types } = this.props;
+
+    // products = _.uniqBy(products, "name");
+    products = _.filter(_.uniqBy(products, "name"), { gender: gender });
 
     return (
       <div className="gender-container">
-        <div>
-          <h5>{title}</h5>
+        <div className="gender-img">
+          <h5>{gender}</h5>
         </div>
-        <Card />
+
+        <div className="row">
+          <div className="col-sm-12 col-md-3 col-md-3">
+            <DropdownButton title="Dropdown button">
+              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            </DropdownButton>
+            <ul>
+              {_.filter(types, { gender: gender }).map((t) => (
+                <NavLink to={`/collections/${gender}/${t.type}`}>
+                  <li key={t._id}>{t.type}</li>
+                </NavLink>
+              ))}
+            </ul>
+            <ul>
+              {colors.map((c) => (
+                <li key={c}>{c}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="card-display col-sm-12 col-md-9 col-lg-9">
+            <Switch>
+              {_.filter(types, { gender: gender }).map((t) => (
+                <Route
+                  path={`/collections/${gender}/${t.type}`}
+                  render={(props) => (
+                    <CardDisplay
+                      gender={gender}
+                      products={products}
+                      type={t.type}
+                    />
+                  )}
+                />
+              ))}
+              <Route
+                path={`/collections/${gender}`}
+                render={(props) => (
+                  <CardDisplay gender={gender} products={products} type="all" />
+                )}
+              />
+            </Switch>
+          </div>
+        </div>
       </div>
     );
   }

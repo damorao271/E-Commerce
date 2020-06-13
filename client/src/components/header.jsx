@@ -7,8 +7,6 @@ class Header extends Component {
   render() {
     const { counter } = this.props;
 
-    console.log("Counter", counter);
-
     return (
       <React.Fragment>
         <div className="sc-nav">
@@ -16,10 +14,12 @@ class Header extends Component {
             <FontAwesomeIcon className="sc-icon" icon={["fab", "instagram"]} />
           </div>
           <div>
-            <h5>
-              <FontAwesomeIcon className="sc-icon" icon="user" />
-            </h5>
-            <h6>LOGIN</h6>
+            <NavLink to="/login">
+              <h5>
+                <FontAwesomeIcon className="sc-icon" icon="user" />
+              </h5>
+              <h6>LOGIN</h6>
+            </NavLink>
           </div>
           <div>
             <FontAwesomeIcon className="sc-icon" icon="shopping-bag" />
