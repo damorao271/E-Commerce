@@ -1,65 +1,75 @@
 import React, { Component } from "react";
-import { Form, Button, Col } from "react-bootstrap";
+import { Form, Button, Col, InputGroup } from "react-bootstrap";
 
 class Login extends Component {
+  state = {
+    account: { username: "", email: "", password: "" },
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    //Call Serer
+
+    console.log("Submitted", this.state.account.username);
+  };
+
+  handleChange = (e) => {
+    const account = { ...this.state.account };
+    account[e.currentTarget.name] = e.currentTarget.value;
+    this.setState({ account });
+  };
+
   render() {
+    console.log("State:", this.state);
+    const { account } = this.state;
     return (
       <React.Fragment>
         <div className="form-container">
           <div id="login-form">
-            <Form>
+            <Form onSubmit={this.handleSubmit}>
               <Form.Row>
-                <Form.Group as={Col} controlId="formGridEmail">
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control type="text" placeholder="Enter Name" />
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="formGridPassword">
-                  <Form.Label>Last Name</Form.Label>
-                  <Form.Control type="text" placeholder="Enter Last Name" />
+                <Form.Group as={Col} controlId="formGridUser">
+                  <Form.Label>Username</Form.Label>
+                  <Form.Control
+                    name="username"
+                    value={account.username}
+                    onChange={this.handleChange}
+                    type="text"
+                    placeholder="Enter Name"
+                  />
                 </Form.Group>
               </Form.Row>
 
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridEmail">
                   <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" placeholder="Enter email" />
+                  <InputGroup>
+                    <InputGroup.Prepend>
+                      <InputGroup.Text id="inputGroupPrepend">
+                        @
+                      </InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <Form.Control
+                      name="email"
+                      value={account.email}
+                      onChange={this.handleChange}
+                      type="email"
+                      placeholder="Enter Email"
+                    />
+                  </InputGroup>
                 </Form.Group>
-
                 <Form.Group as={Col} controlId="formGridPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" placeholder="Password" />
+                  <Form.Label>Pasword</Form.Label>
+                  <Form.Control
+                    name="password"
+                    value={account.password}
+                    onChange={this.handleChange}
+                    type="text"
+                    placeholder="Enter password"
+                  />
                 </Form.Group>
               </Form.Row>
-
-              <Form.Group controlId="formGridAddress1">
-                <Form.Label>Address</Form.Label>
-                <Form.Control placeholder="1234 Main St" />
-              </Form.Group>
-
-              <Form.Row>
-                <Form.Group as={Col} controlId="formGridCity">
-                  <Form.Label>City</Form.Label>
-                  <Form.Control />
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="formGridState">
-                  <Form.Label>State</Form.Label>
-                  <Form.Control as="select" defaultValue="Choose...">
-                    <option>Choose...</option>
-                    <option>...</option>
-                  </Form.Control>
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="formGridZip">
-                  <Form.Label>Zip</Form.Label>
-                  <Form.Control />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Group id="formGridCheckbox">
-                <Form.Check type="checkbox" label="Check me out" />
-              </Form.Group>
 
               <Button variant="primary" type="submit">
                 Submit
