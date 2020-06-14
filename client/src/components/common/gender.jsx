@@ -6,7 +6,7 @@ import _ from "lodash";
 
 class Gender extends Component {
   render() {
-    let { products, gender, colors, types } = this.props;
+    let { products, gender, colors, types, counter, resetCounter } = this.props;
 
     // products = _.uniqBy(products, "name");
     products = _.filter(_.uniqBy(products, "name"), { gender: gender });
@@ -26,8 +26,8 @@ class Gender extends Component {
             </DropdownButton>
             <ul>
               {_.filter(types, { gender: gender }).map((t) => (
-                <NavLink to={`/collections/${gender}/${t.type}`}>
-                  <li key={t._id}>{t.type}</li>
+                <NavLink key={t._id} to={`/collections/${gender}/${t.type}`}>
+                  <li>{t.type}</li>
                 </NavLink>
               ))}
             </ul>
@@ -41,9 +41,12 @@ class Gender extends Component {
             <Switch>
               {_.filter(types, { gender: gender }).map((t) => (
                 <Route
+                  key={t.type}
                   path={`/collections/${gender}/${t.type}`}
                   render={(props) => (
                     <CardDisplay
+                      counter={counter}
+                      resetCounter={resetCounter}
                       gender={gender}
                       products={products}
                       type={t.type}
@@ -54,7 +57,13 @@ class Gender extends Component {
               <Route
                 path={`/collections/${gender}`}
                 render={(props) => (
-                  <CardDisplay gender={gender} products={products} type="all" />
+                  <CardDisplay
+                    counter={counter}
+                    resetCounter={resetCounter}
+                    gender={gender}
+                    products={products}
+                    type="all"
+                  />
                 )}
               />
             </Switch>

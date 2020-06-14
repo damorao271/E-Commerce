@@ -3,7 +3,15 @@ import { Button } from "react-bootstrap";
 
 class CardButton extends Component {
   render() {
-    const { counter, increaseCounter, decreaseCounter, addToCart } = this.props;
+    const {
+      addToCart,
+      increaseCounter,
+      decreaseCounter,
+      counter,
+      products,
+      id,
+    } = this.props;
+
     return (
       <React.Fragment>
         <div className="card-button-container row">
@@ -12,11 +20,17 @@ class CardButton extends Component {
               -
             </Button>
             <div>{counter}</div>
-            <Button onClick={() => increaseCounter(counter)} variant="info">
+            <Button
+              onClick={() => increaseCounter(products, id, counter)}
+              variant="info"
+            >
               +
             </Button>
           </div>
-          <Button onClick={() => addToCart(counter)} variant="dark">
+          <Button
+            onClick={() => addToCart(products, id, counter)}
+            variant="dark"
+          >
             ADD TO CART
           </Button>
         </div>

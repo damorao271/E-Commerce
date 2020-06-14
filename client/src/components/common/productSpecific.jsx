@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Card from "./card";
-import { NavLink } from "react-router-dom";
-import CardButton from "./cartButton";
+import { NavLink, Route } from "react-router-dom";
+import CartButton from "./cartButton";
 import _ from "lodash";
 
 class ProductSpecific extends Component {
@@ -22,7 +22,6 @@ class ProductSpecific extends Component {
         _id: array[i]._id,
       };
     }
-    console.log("Result", result);
     return result;
   };
 
@@ -36,6 +35,7 @@ class ProductSpecific extends Component {
       increaseCounter,
       decreaseCounter,
       addToCart,
+      resetCounter,
     } = this.props;
 
     let productSpecific = _.filter(products, { name: product });
@@ -48,18 +48,18 @@ class ProductSpecific extends Component {
       return <h6>Loading</h6>;
     }
 
-    console.log("Products", products);
-    console.log("Product Sizes", productSizes);
-    console.log("Product Specific", productSpecific);
-    console.log("Related Products", relatedProducts);
+    // console.log("Products", products);
+    // console.log("Product Sizes", productSizes);
+    // console.log("Product Specific", productSpecific);
+    // console.log("Related Products", relatedProducts);
 
-    // products = _.filter(_.uniqBy(products, "name"), { gender: gender });
+    console.log("Type", type);
 
     return (
       <React.Fragment>
         <div className="row">
           <div className="img-container col-sm-12 col-md-6 col-lg-6">
-            <img src="https://via.placeholder.com/350x350" />
+            <img src="https://via.placeholder.com/350x350" alt="First slide" />
           </div>
           <div className="col-sm-12 col-md-6 col-lg-6">
             <div className="product-info">
@@ -68,15 +68,45 @@ class ProductSpecific extends Component {
               <h5>SIZE</h5>
               <div className="sizes-container">
                 {productSizes.map((p) => (
-                  <div>{p.size}</div>
+                  <NavLink
+                    key={p.size}
+                    to={`/collections/${gender}/${type}/${p.name}/${p._id}`}
+                  >
+                    <div onClick={() => resetCounter(counter)} key={p.size}>
+                      {p.size}
+                    </div>
+                  </NavLink>
                 ))}
               </div>
-              <CardButton
+
+              <Route
+                path={`/collections/:gender/:type/:product/:id`}
+                render={(props) => (
+                  <CartButton
+                    addToCart={addToCart}
+                    decreaseCounter={decreaseCounter}
+                    increaseCounter={increaseCounter}
+                    counter={counter}
+                    productSizes={productSizes}
+                    id={props.match.params.id}
+                    products={products}
+                  />
+                )}
+              />
+
+              {/* <CardButton
+                productSizes={productSizes}
                 addToCart={addToCart}
                 decreaseCounter={decreaseCounter}
                 increaseCounter={increaseCounter}
                 counter={counter}
-              />
+              /> */}
+
+              <div>
+                <NavLink to={`/collections/${gender}/${type}`}>
+                  <h6>Type: {type}</h6>
+                </NavLink>
+              </div>
             </div>
           </div>
         </div>
@@ -85,8 +115,9 @@ class ProductSpecific extends Component {
           <div className="related-items-container">
             {relatedProducts.map((rp) => (
               <NavLink
+                onClick={() => resetCounter(counter)}
                 key={rp.name}
-                to={`/collections/${gender}/${type}/${rp.name}`}
+                to={`/collections/${gender}/${type}/${rp.name}/${rp._id}`}
               >
                 <Card key={rp.name} name={rp.name} price={rp.price} />
               </NavLink>

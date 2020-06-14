@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 class Header extends Component {
   render() {
-    const { counter } = this.props;
+    const { counter, resetCounter } = this.props;
 
     return (
       <React.Fragment>
@@ -14,7 +14,7 @@ class Header extends Component {
             <FontAwesomeIcon className="sc-icon" icon={["fab", "instagram"]} />
           </div>
           <div>
-            <NavLink to="/login">
+            <NavLink onClick={() => resetCounter(counter)} to="/login">
               <h5>
                 <FontAwesomeIcon className="sc-icon" icon="user" />
               </h5>
@@ -31,39 +31,57 @@ class Header extends Component {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="m-auto">
               <div>
-                <NavLink to="/">
+                <NavLink onClick={() => resetCounter(counter)} to="/">
                   <h5>HOME</h5>
                 </NavLink>
               </div>
               <div>
-                <NavLink to="/collections/men">
+                <NavLink
+                  onClick={() => resetCounter(counter)}
+                  to="/collections/men"
+                >
                   <h5>MEN</h5>
                 </NavLink>
               </div>
               <div>
-                <NavLink to="/collections/women">
+                <NavLink
+                  onClick={() => resetCounter(counter)}
+                  to="/collections/women"
+                >
                   <h5>WOMEN</h5>
                 </NavLink>
               </div>
 
               <div>
-                <NavLink to="/collections/unisex">
+                <NavLink
+                  onClick={() => resetCounter(counter)}
+                  to="/collections/unisex"
+                >
                   <h5>UNISEX</h5>
                 </NavLink>
               </div>
 
               <div>
-                <NavLink to="/collections/troops">
+                <NavLink
+                  onClick={() => resetCounter(counter)}
+                  to="/collections/troops"
+                >
                   <h5>TROOPS</h5>
                 </NavLink>
               </div>
               <div>
-                <NavLink to="/collections/souvenirs">
+                <NavLink
+                  onClick={() => resetCounter(counter)}
+                  to="/collections/souvenirs"
+                >
                   <h5> SOUVENIRS </h5>
                 </NavLink>
               </div>
               <div>
-                <NavLink to="/collections/sales">
+                <NavLink
+                  onClick={() => resetCounter(counter)}
+                  to="/collections/sales"
+                >
                   <h5>SALES</h5>
                 </NavLink>
               </div>
