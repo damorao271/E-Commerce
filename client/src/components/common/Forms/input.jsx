@@ -14,7 +14,7 @@ class Input extends Component {
           type={type}
           placeholder={placeholder}
         />
-        {error && <div className="alert alert-danger">{error}</div>}
+        {error && <div className="alert alert-danger w-100">{error}</div>}
       </React.Fragment>
     );
   }

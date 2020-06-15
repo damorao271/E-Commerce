@@ -10,10 +10,18 @@ class Header extends Component {
     return (
       <React.Fragment>
         <div className="sc-nav">
-          <div>
+          <div className="col-9">
             <FontAwesomeIcon className="sc-icon" icon={["fab", "instagram"]} />
           </div>
-          <div>
+          <div className="login-link col-1">
+            <NavLink onClick={() => resetCounter(counter)} to="/signup">
+              <h5>
+                <FontAwesomeIcon className="sc-icon" icon="user" />
+              </h5>
+              <h6>SIGN UP</h6>
+            </NavLink>
+          </div>
+          <div className="login-link col-1">
             <NavLink onClick={() => resetCounter(counter)} to="/login">
               <h5>
                 <FontAwesomeIcon className="sc-icon" icon="user" />
@@ -21,7 +29,7 @@ class Header extends Component {
               <h6>LOGIN</h6>
             </NavLink>
           </div>
-          <div>
+          <div className="cart-counter col-1">
             <FontAwesomeIcon className="sc-icon" icon="shopping-bag" />
             <h6>{counter}</h6>
           </div>

@@ -86,7 +86,7 @@ code {
 .col-xl-8,
 .col-xl-9,
 .col-xl-auto {
-  /* padding: 0px; */
+  padding: 0px;
   margin: 0px;
   border: 1px solid black;
 }
@@ -104,47 +104,46 @@ code {
   border: 1px solid black;
 }
 
-.sc-nav div:nth-child(1) {
-  width: 80%;
-}
-
-.sc-nav div:nth-child(2) {
-  display: flex;
-  flex-flow: row;
-  justify-content: center;
-  align-items: center;
-  width: 10%;
+.login-link {
   transition: all 300ms;
 }
 
-.sc-nav div:nth-child(2) h5 {
+.login-link a {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.login-link h5 {
   margin-bottom: 0px;
   transition: all 300ms;
 }
 
-.sc-nav div:nth-child(2):hover {
+.login-link:hover {
   cursor: pointer;
 }
 
-.sc-nav div:nth-child(2):hover h5 {
+.login-link:hover h5 {
   transform: scale(1.05, 1.05);
 }
 
-.sc-nav div:nth-child(2) h6 {
+.login-link h6 {
   margin-left: 5px;
+  width: auto;
   margin-bottom: 0px;
   transition: all 300ms;
 }
 
-.sc-nav div:nth-child(3) {
+.cart-counter {
   display: flex;
   flex-flow: row;
   justify-content: center;
   align-items: center;
-  width: 10%;
 }
 
-.sc-nav div:nth-child(3) h6 {
+.cart-counter h6 {
   margin-left: 5px;
   margin-bottom: 0px;
 }
@@ -253,11 +252,12 @@ code {
 /* Login */
 .form-container {
   display: flex;
+  align-items: center;
   justify-content: center;
+  flex-flow: column;
 }
 
-#login-form {
-  width: 50%;
+.login-form {
   padding: 10px;
   border: 1px solid black;
   border-radius: 10px;

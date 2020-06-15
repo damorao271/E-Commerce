@@ -1,19 +1,27 @@
-import React, { Component } from "react";
+import React from "react";
 import { Form, Button, Col, InputGroup } from "react-bootstrap";
-import Formulario from "./common/Forms/form";
-import Input from "./common/Forms/input";
+import Formulario from "./form";
+import Input from "./input";
 import Joi from "joi";
 
-class Login extends Formulario {
+class SignUpForm extends Formulario {
   state = {
-    data: { username: "", email: "", password: "" },
+    data: {
+      name: "",
+      lastname: "",
+      email: "",
+      password: "",
+      address: "",
+    },
     errors: {},
   };
 
   schema = {
-    username: Joi.string().required().min(5).trim().label("Username"),
+    name: Joi.string().required().trim().label("Name"),
+    lastname: Joi.string().required().trim().label("Lastname"),
     email: Joi.string().required().label("Email"),
     password: Joi.string().required().min(5).label("Password"),
+    address: Joi.string().required().label("Address"),
   };
 
   // Esta parte debe ajustarse de a ceurdo a la logica de cada
@@ -35,26 +43,39 @@ class Login extends Formulario {
     return (
       <React.Fragment>
         <div className="form-container">
-          <div id="login-form">
+          <h1>Register</h1>
+
+          <div className="login-form col-6">
             <Form onSubmit={this.handleSubmit}>
               <Form.Row>
-                <Form.Group as={Col} controlId="formGridUser">
-                  <Form.Label>Username</Form.Label>
-
-                  <Form.Group>
+                <Form.Group as={Col} controlId="formGridName">
+                  <Form.Label>Name</Form.Label>
+                  <InputGroup>
                     <Input
-                      name="username"
-                      value={data.username}
-                      label="Username"
+                      name="name"
+                      value={data.name}
+                      label="Name"
                       type="text"
                       onChange={this.handleChange}
-                      error={errors.username}
-                      placeholder="Enter Username"
+                      error={errors.name}
+                      placeholder="Enter Name"
                     />
-                  </Form.Group>
+                  </InputGroup>
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridLastName">
+                  <Form.Label>Lastname</Form.Label>
+
+                  <Input
+                    name="lastname"
+                    value={data.lastname}
+                    label="Lastname"
+                    type="text"
+                    onChange={this.handleChange}
+                    error={errors.lastname}
+                    placeholder="Enter Lastname"
+                  />
                 </Form.Group>
               </Form.Row>
-
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridEmail">
                   <Form.Label>Email</Form.Label>
@@ -82,11 +103,28 @@ class Login extends Formulario {
                     name="password"
                     value={data.password}
                     label="Password"
-                    type="text"
+                    type="password"
                     onChange={this.handleChange}
                     error={errors.password}
                     placeholder="Enter Password"
                   />
+                </Form.Group>
+              </Form.Row>
+
+              <Form.Row>
+                <Form.Group as={Col} controlId="formGridAddress">
+                  <Form.Label>Address</Form.Label>
+                  <Form.Group>
+                    <Input
+                      name="address"
+                      value={data.address}
+                      label="Address"
+                      type="text"
+                      onChange={this.handleChange}
+                      error={errors.address}
+                      placeholder="Enter Address"
+                    />
+                  </Form.Group>
                 </Form.Group>
               </Form.Row>
 
@@ -105,4 +143,4 @@ class Login extends Formulario {
   }
 }
 
-export default Login;
+export default SignUpForm;
