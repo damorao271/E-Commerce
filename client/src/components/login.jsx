@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Form, Button, Col, InputGroup } from "react-bootstrap";
-import Input from "./common/input";
+import Formulario from "./common/Forms/form";
+import Input from "./common/Forms/input";
 import Joi from "joi";
 
-class Login extends Component {
+class Login extends Formulario {
   state = {
     data: { username: "", email: "", password: "" },
-    errors: { username: "", email: "", password: "" },
+    errors: {},
   };
 
   schema = {
@@ -15,51 +16,17 @@ class Login extends Component {
     password: Joi.string().required().min(5).label("Password"),
   };
 
-  validate = () => {
-    const options = { abortEarly: false };
-    const { error } = Joi.validate(this.state.data, this.schema, options);
-    if (!error) return null;
+  // Esta parte debe ajustarse de a ceurdo a la logica de cada
+  // formulario doSu bmit()
 
-    const errors = {};
-    for (let item of error.details) errors[item.path[0]] = item.message;
-    return errors;
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const errors = this.validate();
-
-    this.setState({
-      errors: errors || { username: "", email: "", password: "" },
-    });
-
+  doSubmit = () => {
     if (this.validate()) {
       console.log("CANT SUBMIT !! ");
 
       // Validar que el usuario sea unico en el server
     } else {
-      console.log("Submitted");
+      console.log("Submitted", this.state.data);
     }
-    if (errors) return;
-  };
-
-  validateProperty = ({ name, value }) => {
-    const obj = { [name]: value };
-    const schema = { [name]: this.schema[name] };
-    const { error } = Joi.validate(obj, schema);
-    return error ? error.details[0].message : null;
-  };
-
-  handleChange = ({ currentTarget: input }) => {
-    const errors = { ...this.state.errors };
-    const errorMessage = this.validateProperty(input);
-
-    if (!errorMessage) errors[input.name] = errorMessage;
-    else delete errors[input.name];
-
-    const data = { ...this.state.data };
-    data[input.name] = input.value.trim();
-    this.setState({ data, errors });
   };
 
   render() {
