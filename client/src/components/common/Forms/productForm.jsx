@@ -12,7 +12,7 @@ class ProductForm extends Formulario {
   state = {
     colors: [],
     types: [],
-    sizes: ["x", "s", "m", "l", "xl", "xxl", "xxxl"],
+    sizes: ["X", "S", "M", "L", "XL", "XXL", "XXXL"],
     gender: ["Men", "Women", "Unisex", "Troops", "Souvenirs", "Sales"],
     data: {
       name: "",
@@ -44,8 +44,8 @@ class ProductForm extends Formulario {
   componentDidMount = async () => {
     let types = await getTypes();
     let colors = await getColor();
-    types = _.uniqBy(types, "type");
-    colors = _.uniqBy(colors, "name");
+    types = _.map(_.uniqBy(types, "type"), "type");
+    colors = _.map(_.uniqBy(colors, "name"), "name");
     this.setState({ types, colors });
   };
 
@@ -55,7 +55,7 @@ class ProductForm extends Formulario {
 
       // Validar que el usuario sea unico en el server
     } else {
-      console.log("Submitted", this.state.data);
+      console.log("Submitted Product", this.state.data);
     }
   };
 
@@ -86,49 +86,54 @@ class ProductForm extends Formulario {
                 </Form.Group>
                 <Form.Group controlId="exampleForm.SelectCustom">
                   <Form.Label>Type</Form.Label>
-                  <Form.Control label="type" as="select" custom>
-                    {types.map((t) => (
-                      <option
-                        value={t.type}
-                        error={errors.type}
-                        key={t.type}
-                        className="form-option"
-                      >
-                        {t.type}
-                      </option>
-                    ))}
-                  </Form.Control>
+                  <Select
+                    value={types}
+                    label="type"
+                    options={types}
+                    onChange={this.handleChange}
+                    error={errors.type}
+                  />
                 </Form.Group>
 
                 <Form.Group controlId="exampleForm.SelectCustom">
                   <Form.Label>Gender</Form.Label>
-                  <Form.Control as="select" custom>
-                    {gender.map((t) => (
-                      <option
-                        value={t}
-                        onChange={this.handleChange}
-                        error={errors.t}
-                        key={t}
-                        className="form-option"
-                      >
-                        {t}
-                      </option>
-                    ))}
-                  </Form.Control>
+
+                  <Select
+                    value={gender}
+                    label="gender"
+                    options={gender}
+                    onChange={this.handleChange}
+                    error={errors.gender}
+                  />
                 </Form.Group>
               </Form.Row>
               <Form.Row>
-                <Form.Group as={Col} controlId="formGridName">
-                  <Form.Label>Price</Form.Label>
+                <Form.Group as={Col} controlId="formGridQuantity">
+                  <Form.Label>Quantity</Form.Label>
+                  <InputGroup>
+                    <Input
+                      name="quantity"
+                      value={data.quantity}
+                      label="Name"
+                      type="text"
+                      onChange={this.handleChange}
+                      error={errors.quantity}
+                      placeholder="0"
+                    />
+                  </InputGroup>
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridPrice">
+                  <Form.Label>Price $</Form.Label>
                   <InputGroup>
                     <Input
                       name="price"
                       value={data.price}
-                      label="Name"
+                      label="Price"
                       type="text"
                       onChange={this.handleChange}
                       error={errors.price}
-                      placeholder="0 $"
+                      placeholder="0"
                     />
                   </InputGroup>
                 </Form.Group>
@@ -136,37 +141,25 @@ class ProductForm extends Formulario {
                 <Form.Group as={Col} controlId="formGridPassword">
                   <Form.Label>Colors</Form.Label>
                   <Form.Group controlId="exampleForm.SelectCustom">
-                    <Form.Control as="select" custom>
-                      {colors.map((c) => (
-                        <option
-                          value={c.name}
-                          key={c.name}
-                          onChange={this.handleChange}
-                          error={errors.name}
-                          className="form-option"
-                        >
-                          {c.name}
-                        </option>
-                      ))}
-                    </Form.Control>
+                    <Select
+                      value={colors}
+                      label="color"
+                      options={colors}
+                      onChange={this.handleChange}
+                      error={errors.color}
+                    />
                   </Form.Group>
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridPassword">
                   <Form.Label>Size</Form.Label>
                   <Form.Group controlId="exampleForm.SelectCustom">
-                    <Form.Control as="select" custom>
-                      {sizes.map((s) => (
-                        <option
-                          value={s}
-                          key={s}
-                          onChange={this.handleChange}
-                          error={errors.s}
-                          className="form-option-uppercase"
-                        >
-                          {s}
-                        </option>
-                      ))}
-                    </Form.Control>
+                    <Select
+                      value={sizes}
+                      label="size"
+                      options={sizes}
+                      onChange={this.handleChange}
+                      error={errors.size}
+                    />
                   </Form.Group>
                 </Form.Group>
               </Form.Row>
