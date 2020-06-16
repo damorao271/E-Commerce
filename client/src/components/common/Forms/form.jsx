@@ -32,6 +32,7 @@ class Form extends Component {
     });
     if (errors) return;
     this.doSubmit();
+    return true;
   };
 
   handleChange = ({ currentTarget: input }) => {
@@ -44,6 +45,7 @@ class Form extends Component {
     const data = { ...this.state.data };
     data[input.name] = input.value.trim();
     this.setState({ data, errors });
+    console.log("Data:", data);
   };
 }
 

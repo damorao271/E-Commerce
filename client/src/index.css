@@ -262,3 +262,11 @@ code {
   border: 1px solid black;
   border-radius: 10px;
 }
+
+.form-option {
+  text-transform: capitalize;
+}
+
+.form-option-uppercase {
+  text-transform: uppercase;
+}

@@ -7,6 +7,7 @@ import { Route, Switch } from "react-router-dom";
 import Home from "./components/home";
 import LoginForm from "./components/common/Forms/loginForm";
 import SignUpForm from "./components/common/Forms/signUpForm";
+import ProductForm from "./components/common/Forms/productForm";
 import Gender from "./components/common/gender";
 import { getTypes } from "./services/typeService";
 import { getProducts } from "./services/productsService";
@@ -110,7 +111,7 @@ class App extends React.Component {
           ))}
           <Route path="/login" component={LoginForm} />
           <Route path="/signup" component={SignUpForm} />
-
+          <Route path="/productform" component={ProductForm} />
           <Route path="/" component={Home} />
         </Switch>
         <Footer />
