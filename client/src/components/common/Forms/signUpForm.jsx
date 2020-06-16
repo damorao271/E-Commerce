@@ -55,7 +55,7 @@ class SignUpForm extends Formulario {
                   <InputGroup>
                     <Input
                       name="name"
-                      value={data.name}
+                      value={data.name.trim()}
                       label="Name"
                       type="text"
                       onChange={this.handleChange}
@@ -69,7 +69,7 @@ class SignUpForm extends Formulario {
 
                   <Input
                     name="lastname"
-                    value={data.lastname}
+                    value={data.lastname.trim()}
                     label="Lastname"
                     type="text"
                     onChange={this.handleChange}
@@ -89,7 +89,7 @@ class SignUpForm extends Formulario {
                     </InputGroup.Prepend>
                     <Input
                       name="email"
-                      value={data.email}
+                      value={data.email.trim()}
                       label="Email"
                       type="email"
                       onChange={this.handleChange}
@@ -103,7 +103,7 @@ class SignUpForm extends Formulario {
 
                   <Input
                     name="password"
-                    value={data.password}
+                    value={data.password.trim()}
                     label="Password"
                     type="password"
                     onChange={this.handleChange}

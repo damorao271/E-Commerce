@@ -3,6 +3,7 @@ import { getTypes } from "../../../services/typeService";
 import { getColor } from "../../../services/colorService";
 import { Form, Button, Col, InputGroup } from "react-bootstrap";
 import Formulario from "./form";
+import Select from "./select";
 import Input from "./input";
 import Joi from "joi";
 import _ from "lodash";
@@ -85,7 +86,7 @@ class ProductForm extends Formulario {
                 </Form.Group>
                 <Form.Group controlId="exampleForm.SelectCustom">
                   <Form.Label>Type</Form.Label>
-                  <Form.Control as="select" onChange={this.handleChange} custom>
+                  <Form.Control label="type" as="select" custom>
                     {types.map((t) => (
                       <option
                         value={t.type}

@@ -48,7 +48,7 @@ class LoginForm extends Formulario {
                     </InputGroup.Prepend>
                     <Input
                       name="email"
-                      value={data.email}
+                      value={data.email.trim()}
                       label="Email"
                       type="email"
                       onChange={this.handleChange}
@@ -65,7 +65,7 @@ class LoginForm extends Formulario {
 
                   <Input
                     name="password"
-                    value={data.password}
+                    value={data.password.trim()}
                     label="Password"
                     type="password"
                     onChange={this.handleChange}
