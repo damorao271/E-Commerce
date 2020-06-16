@@ -1,4 +1,5 @@
 import React from "react";
+import { saveUser } from "../../../services/userService";
 import { Form, Button, Col, InputGroup } from "react-bootstrap";
 import Formulario from "./form";
 import Input from "./input";
@@ -27,12 +28,13 @@ class SignUpForm extends Formulario {
   // Esta parte debe ajustarse de a ceurdo a la logica de cada
   // formulario doSu bmit()
 
-  doSubmit = () => {
+  doSubmit = async () => {
     if (this.validate()) {
       console.log("CANT SUBMIT !! ");
 
       // Validar que el usuario sea unico en el server
     } else {
+      await saveUser(this.state.data);
       console.log("Submitted", this.state.data);
     }
   };

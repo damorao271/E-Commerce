@@ -15,3 +15,12 @@ export async function getProducts() {
     return error;
   }
 }
+
+export async function getProductsByID(id) {
+  try {
+    const { data } = await http.get(`${apiEndPoint}/${id}`);
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
