@@ -22,7 +22,5 @@ export async function saveUser(user) {
   //   delete body._id;
   //   return http.put(movieUrl(user._id), body);
   // }
-  console.log("URL:", apiEndPoint);
-  console.log("User:", user);
   return http.post(apiEndPoint, user);
 }

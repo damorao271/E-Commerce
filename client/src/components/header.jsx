@@ -14,6 +14,11 @@ class Header extends Component {
             <FontAwesomeIcon className="sc-icon" icon={["fab", "instagram"]} />
           </div>
           <div className="login-link col-1">
+            <NavLink onClick={() => resetCounter(counter)} to="/productform">
+              <h6>Product Form</h6>
+            </NavLink>
+          </div>
+          <div className="login-link col-1">
             <NavLink onClick={() => resetCounter(counter)} to="/signup">
               <h5>
                 <FontAwesomeIcon className="sc-icon" icon="user" />

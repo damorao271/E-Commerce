@@ -15,7 +15,7 @@ class Select extends Component {
         >
           <option value=""></option>
           {options.map((option) => (
-            <option key={option} value={option}>
+            <option className="form-option" key={option} value={option}>
               {option}
             </option>
           ))}

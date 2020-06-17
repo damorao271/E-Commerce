@@ -1,6 +1,7 @@
 import React from "react";
 import { getTypes } from "../../../services/typeService";
 import { getColor } from "../../../services/colorService";
+import { saveProduct } from "../../../services/productsService";
 import { Form, Button, Col, InputGroup } from "react-bootstrap";
 import Formulario from "./form";
 import Select from "./select";
@@ -55,6 +56,7 @@ class ProductForm extends Formulario {
 
       // Validar que el usuario sea unico en el server
     } else {
+      await saveProduct(this.state.data);
       console.log("Submitted Product", this.state.data);
     }
   };

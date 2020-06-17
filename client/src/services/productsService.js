@@ -24,3 +24,14 @@ export async function getProductsByID(id) {
     return error;
   }
 }
+
+export async function saveProduct(product) {
+  // if (user._id) {
+  //   const body = { ...user };
+  //   delete body._id;
+  //   return http.put(movieUrl(user._id), body);
+  // }
+  console.log("URL:", apiEndPoint);
+  console.log("User:", product);
+  return http.post(apiEndPoint, product);
+}

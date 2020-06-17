@@ -34,8 +34,16 @@ class SignUpForm extends Formulario {
 
       // Validar que el usuario sea unico en el server
     } else {
-      await saveUser(this.state.data);
-      console.log("Submitted", this.state.data);
+      try {
+        await saveUser(this.state.data);
+        console.log("Submitted", this.state.data);
+      } catch (ex) {
+        if (ex.response && ex.response.status === 400) {
+          const errors = { ...this.state.errors };
+          errors.username = ex.response.data;
+          this.setState({ errors });
+        }
+      }
     }
   };
 
