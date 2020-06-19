@@ -20,7 +20,7 @@ class SignUpForm extends Formulario {
   schema = {
     name: Joi.string().required().trim().label("Name"),
     lastname: Joi.string().required().trim().label("Lastname"),
-    email: Joi.string().required().label("Email"),
+    email: Joi.string().required().email().label("Email"),
     password: Joi.string().required().min(5).label("Password"),
     address: Joi.string().required().label("Address"),
   };
