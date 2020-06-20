@@ -1,7 +1,9 @@
 import http from "./httpServices";
-require("dotenv").config();
+let apiEndPoint = require("../../src/env");
 
-let apiEndPoint = process.env.SERVER_URL + "/users";
+// apiEndPoint = "http://localhost:3900";
+
+// apiEndPoint = apiEndPoint + "/users";
 
 apiEndPoint = "https://e-commerce-mern-power.herokuapp.com/typeList";
 
