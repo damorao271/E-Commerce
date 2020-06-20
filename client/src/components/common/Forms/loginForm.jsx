@@ -3,6 +3,7 @@ import { Form, Button, Col, InputGroup } from "react-bootstrap";
 import Formulario from "./form";
 import Input from "./input";
 import Joi from "joi";
+import { login } from "../../../services/authService";
 
 class LoginForm extends Formulario {
   state = {
@@ -18,13 +19,18 @@ class LoginForm extends Formulario {
   // Esta parte debe ajustarse de a ceurdo a la logica de cada
   // formulario doSu bmit()
 
-  doSubmit = () => {
-    if (this.validate()) {
-      console.log("CANT SUBMIT !! ");
-
-      // Validar que el usuario sea unico en el server
-    } else {
-      console.log("Submitted", this.state.data);
+  doSubmit = async () => {
+    try {
+      const { data } = this.state;
+      const { data: jwt } = await login(data.email, data.password);
+      localStorage.setItem("token", jwt);
+      this.props.history.push("/");
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        let errors = { ...this.state.errors };
+        errors.email = ex.response.data;
+        this.setState({ errors });
+      }
     }
   };
 
@@ -35,7 +41,7 @@ class LoginForm extends Formulario {
       <React.Fragment>
         <div className="form-container">
           <h1>Login</h1>
-          <div className="login-form">
+          <div className="login-form col-4">
             <Form onSubmit={this.handleSubmit}>
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridEmail">
@@ -76,7 +82,7 @@ class LoginForm extends Formulario {
               </Form.Row>
 
               <Button
-                disabled={this.validate()}
+                // disabled={this.validate()}
                 variant="primary"
                 type="submit"
               >

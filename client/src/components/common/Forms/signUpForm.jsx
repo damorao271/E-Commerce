@@ -29,20 +29,16 @@ class SignUpForm extends Formulario {
   // formulario doSu bmit()
 
   doSubmit = async () => {
-    if (this.validate()) {
-      console.log("CANT SUBMIT !! ");
-
-      // Validar que el usuario sea unico en el server
-    } else {
-      try {
-        await saveUser(this.state.data);
-        console.log("Submitted", this.state.data);
-      } catch (ex) {
-        if (ex.response && ex.response.status === 400) {
-          const errors = { ...this.state.errors };
-          errors.username = ex.response.data;
-          this.setState({ errors });
-        }
+    try {
+      const response = await saveUser(this.state.data);
+      localStorage.setItem("token", response.headers["x-auth-token"]);
+      this.props.history.push("/");
+      console.log(response);
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        const errors = { ...this.state.errors };
+        errors.email = ex.response.data;
+        this.setState({ errors });
       }
     }
   };
@@ -63,7 +59,7 @@ class SignUpForm extends Formulario {
                   <InputGroup>
                     <Input
                       name="name"
-                      value={data.name.trim()}
+                      value={data.name}
                       label="Name"
                       type="text"
                       onChange={this.handleChange}
@@ -77,7 +73,7 @@ class SignUpForm extends Formulario {
 
                   <Input
                     name="lastname"
-                    value={data.lastname.trim()}
+                    value={data.lastname}
                     label="Lastname"
                     type="text"
                     onChange={this.handleChange}
