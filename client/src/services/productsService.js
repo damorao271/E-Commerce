@@ -34,6 +34,6 @@ export async function saveProduct(product) {
   //   return http.put(movieUrl(user._id), body);
   // }
   console.log("URL:", apiEndPoint);
-  console.log("User:", product);
+  console.log("Product:", product);
   return http.post(apiEndPoint, product);
 }

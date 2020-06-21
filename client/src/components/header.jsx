@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 class Header extends Component {
   render() {
-    const { counter, resetCounter } = this.props;
+    const { counter, resetCounter, user } = this.props;
 
     return (
       <React.Fragment>
@@ -18,22 +18,47 @@ class Header extends Component {
               <h6>Product Form</h6>
             </NavLink>
           </div>
-          <div className="login-link col-1">
-            <NavLink onClick={() => resetCounter(counter)} to="/signup">
-              <h5>
-                <FontAwesomeIcon className="sc-icon" icon="user" />
-              </h5>
-              <h6>SIGN UP</h6>
-            </NavLink>
-          </div>
-          <div className="login-link col-1">
-            <NavLink onClick={() => resetCounter(counter)} to="/login">
-              <h5>
-                <FontAwesomeIcon className="sc-icon" icon="user" />
-              </h5>
-              <h6>LOGIN</h6>
-            </NavLink>
-          </div>
+          {!user && (
+            <React.Fragment>
+              <div className="login-link col-1">
+                <NavLink onClick={() => resetCounter(counter)} to="/signup">
+                  <h5>
+                    <FontAwesomeIcon className="sc-icon" icon="user" />
+                  </h5>
+                  <h6>SIGN UP</h6>
+                </NavLink>
+              </div>
+              <div className="login-link col-1">
+                <NavLink onClick={() => resetCounter(counter)} to="/login">
+                  <h5>
+                    <FontAwesomeIcon className="sc-icon" icon="user" />
+                  </h5>
+                  <h6>LOGIN</h6>
+                </NavLink>
+              </div>
+            </React.Fragment>
+          )}
+          {user && (
+            <React.Fragment>
+              <div className="login-link col-1">
+                <NavLink onClick={() => resetCounter(counter)} to="/signup">
+                  <h5>
+                    <FontAwesomeIcon className="sc-icon" icon="user" />
+                  </h5>
+                  <h6>{user.name}</h6>
+                </NavLink>
+              </div>
+              <div className="login-link col-1">
+                <NavLink onClick={() => resetCounter(counter)} to="/logout">
+                  <h5>
+                    <FontAwesomeIcon className="sc-icon" icon="user" />
+                  </h5>
+                  <h6>LOGOUT</h6>
+                </NavLink>
+              </div>
+            </React.Fragment>
+          )}
+
           <div className="cart-counter col-1">
             <FontAwesomeIcon className="sc-icon" icon="shopping-bag" />
             <h6>{counter}</h6>

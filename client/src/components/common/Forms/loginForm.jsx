@@ -3,7 +3,8 @@ import { Form, Button, Col, InputGroup } from "react-bootstrap";
 import Formulario from "./form";
 import Input from "./input";
 import Joi from "joi";
-import { login } from "../../../services/authService";
+import auth from "../../../services/authService";
+import { Redirect } from "react-router-dom";
 
 class LoginForm extends Formulario {
   state = {
@@ -22,9 +23,11 @@ class LoginForm extends Formulario {
   doSubmit = async () => {
     try {
       const { data } = this.state;
-      const { data: jwt } = await login(data.email, data.password);
-      localStorage.setItem("token", jwt);
-      this.props.history.push("/");
+      await auth.login(data.email, data.password);
+      const { state } = this.props.location;
+      window.location = state ? state.from.pathname : "/";
+      // this.props.history.push("/");// No genera full reload
+      // window.location = "/";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         let errors = { ...this.state.errors };
@@ -36,6 +39,8 @@ class LoginForm extends Formulario {
 
   render() {
     const { data, errors } = this.state;
+
+    if (auth.getCurrentUser()) return <Redirect to="/" />;
 
     return (
       <React.Fragment>

@@ -51,14 +51,18 @@ class ProductForm extends Formulario {
   };
 
   doSubmit = async () => {
-    if (this.validate()) {
-      console.log("CANT SUBMIT !! ");
-
-      // Validar que el usuario sea unico en el server
-    } else {
+    try {
       await saveProduct(this.state.data);
       console.log("Submitted Product", this.state.data);
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        const errors = { ...this.state.errors };
+        errors.name = ex.response.data;
+        this.setState({ errors });
+      }
     }
+
+    // Validar que el usuario sea unico en el server
   };
 
   render() {

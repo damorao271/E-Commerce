@@ -3,6 +3,7 @@ import { saveUser } from "../../../services/userService";
 import { Form, Button, Col, InputGroup } from "react-bootstrap";
 import Formulario from "./form";
 import Input from "./input";
+import auth from "../../../services/authService";
 import Joi from "joi";
 
 class SignUpForm extends Formulario {
@@ -31,8 +32,10 @@ class SignUpForm extends Formulario {
   doSubmit = async () => {
     try {
       const response = await saveUser(this.state.data);
-      localStorage.setItem("token", response.headers["x-auth-token"]);
-      this.props.history.push("/");
+      auth.loginWithJWT(response.headers["x-auth-token"]);
+      // this.props.history.push("/");//No hace full reload
+      window.location = "/"; //Hace refresh page
+
       console.log(response);
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {

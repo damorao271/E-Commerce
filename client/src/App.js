@@ -7,14 +7,18 @@ import { Route, Switch } from "react-router-dom";
 import Home from "./components/home";
 import LoginForm from "./components/common/Forms/loginForm";
 import SignUpForm from "./components/common/Forms/signUpForm";
+import Logout from "./components/logout";
 import ProductForm from "./components/common/Forms/productForm";
 import Gender from "./components/common/gender";
+import ProtectedRoute from "./components/protectedRoute";
 import { getTypes } from "./services/typeService";
 import { getProducts } from "./services/productsService";
+import auth from "./services/authService";
 import _ from "lodash";
 
 class App extends React.Component {
   state = {
+    user: "",
     colors: [],
     types: [],
     products: [],
@@ -23,6 +27,8 @@ class App extends React.Component {
   };
 
   componentDidMount = async () => {
+    const user = auth.getCurrentUser();
+    this.setState({ user });
     const types = await getTypes();
     const products = await getProducts();
     let colors = _.uniqBy(products, "color");
@@ -69,11 +75,15 @@ class App extends React.Component {
   };
 
   render() {
-    const { products, counter, nav, colors, types } = this.state;
+    const { products, counter, nav, colors, types, user } = this.state;
 
     return (
       <div className="App">
-        <Header counter={counter} resetCounter={this.resetCounter} />
+        <Header
+          user={user}
+          counter={counter}
+          resetCounter={this.resetCounter}
+        />
         <Switch>
           <Route
             path={`/collections/:gender/:type/:product`}
@@ -110,8 +120,17 @@ class App extends React.Component {
             />
           ))}
           <Route path="/login" component={LoginForm} />
+          <Route path="/logout" component={Logout} />
           <Route path="/signup" component={SignUpForm} />
-          <Route path="/productform" component={ProductForm} />
+          <ProtectedRoute path="/productform" component={ProductForm} />
+
+          {/* <Route
+            path="/productform"
+            render={(props) => {
+              if (!user) return <Redirect to="/login" />;
+              return <ProductForm {...props} />;
+            }}
+          /> */}
           <Route path="/" component={Home} />
         </Switch>
         <Footer />
