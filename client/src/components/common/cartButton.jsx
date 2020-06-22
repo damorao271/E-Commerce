@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 class CardButton extends Component {
   render() {
     const {
+      getObject,
       addToCart,
       increaseCounter,
       decreaseCounter,

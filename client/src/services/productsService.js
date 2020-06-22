@@ -1,5 +1,5 @@
 import http from "./httpServices";
-let apiEndPoint = require("../../src/env");
+// let apiEndPoint = require("../../src/env");
 
 // apiEndPoint = "http://localhost:3900";
 
@@ -7,7 +7,7 @@ let apiEndPoint = require("../../src/env");
 
 // apiEndPoint = "http://localhost:3900/users";
 
-apiEndPoint = "https://e-commerce-mern-power.herokuapp.com/products";
+let apiEndPoint = "https://e-commerce-mern-power.herokuapp.com/products";
 
 export async function getProducts() {
   try {

@@ -53,7 +53,7 @@ class ProductForm extends Formulario {
   doSubmit = async () => {
     try {
       await saveProduct(this.state.data);
-      console.log("Submitted Product", this.state.data);
+      window.location = "/productform"; //Hace refresh page
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };

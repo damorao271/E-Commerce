@@ -1,10 +1,10 @@
 import http from "./httpServices";
-let apiEndPoint = require("../../src/env");
+// let apiEndPoint = require("../../src/env");
 
 // apiEndPoint = "http://localhost:3900";
 // apiEndPoint = apiEndPoint + "/users";
 
-apiEndPoint = "https://e-commerce-mern-power.herokuapp.com/users";
+let apiEndPoint = "https://e-commerce-mern-power.herokuapp.com/users";
 
 export async function getUser() {
   try {

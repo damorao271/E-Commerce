@@ -10,7 +10,7 @@ class Header extends Component {
     return (
       <React.Fragment>
         <div className="sc-nav">
-          <div className="col-9">
+          <div className="col-8">
             <FontAwesomeIcon className="sc-icon" icon={["fab", "instagram"]} />
           </div>
           <div className="login-link col-1">

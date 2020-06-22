@@ -13,6 +13,12 @@ import Gender from "./components/common/gender";
 import ProtectedRoute from "./components/protectedRoute";
 import { getTypes } from "./services/typeService";
 import { getProducts } from "./services/productsService";
+import {
+  saveCart,
+  getCartByUserAndId,
+  editCart,
+  deleteCart,
+} from "./services/cartService";
 import auth from "./services/authService";
 import _ from "lodash";
 
@@ -23,7 +29,7 @@ class App extends React.Component {
     types: [],
     products: [],
     counter: 0,
-    nav: ["men", "women", "unisex", "troops", "souvenirs", "sales"],
+    nav: ["Men", "Women", "Unisex", "Troops", "Souvenirs", "Sales"],
   };
 
   componentDidMount = async () => {
@@ -67,11 +73,35 @@ class App extends React.Component {
     this.setState({ counter });
   };
 
-  addToCart = (products, id, counter) => {
+  addToCart = async (products, id, counter) => {
     products = _.filter(products, { _id: id });
+    products = { ...products[0] };
+    products.user = this.state.user.email;
+    products.quantity = counter;
+    products.productId = id;
+    delete products.description;
+    delete products.createdAt;
+    delete products.updatedAt;
+    delete products.__v;
+    delete products._id;
 
-    console.log("# a comoprar: ", counter);
-    console.log("Producto a comoprar: ", products);
+    const existo = await getCartByUserAndId(products.user, products.productId);
+
+    if (existo[0] && counter !== 0) {
+      await editCart(products, existo[0]._id);
+    }
+
+    if (existo[0] && counter === 0) {
+      await deleteCart(existo[0]._id);
+    }
+
+    if (!existo[0] && counter !== 0) {
+      try {
+        await saveCart(products);
+      } catch (ex) {
+        console.log(ex);
+      }
+    }
   };
 
   render() {
@@ -124,13 +154,6 @@ class App extends React.Component {
           <Route path="/signup" component={SignUpForm} />
           <ProtectedRoute path="/productform" component={ProductForm} />
 
-          {/* <Route
-            path="/productform"
-            render={(props) => {
-              if (!user) return <Redirect to="/login" />;
-              return <ProductForm {...props} />;
-            }}
-          /> */}
           <Route path="/" component={Home} />
         </Switch>
         <Footer />

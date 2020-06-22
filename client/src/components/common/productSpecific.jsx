@@ -48,13 +48,6 @@ class ProductSpecific extends Component {
       return <h6>Loading</h6>;
     }
 
-    // console.log("Products", products);
-    // console.log("Product Sizes", productSizes);
-    // console.log("Product Specific", productSpecific);
-    // console.log("Related Products", relatedProducts);
-
-    console.log("Type", type);
-
     return (
       <React.Fragment>
         <div className="row">
@@ -83,6 +76,7 @@ class ProductSpecific extends Component {
                 path={`/collections/:gender/:type/:product/:id`}
                 render={(props) => (
                   <CartButton
+                    getObject={this.getObject}
                     addToCart={addToCart}
                     decreaseCounter={decreaseCounter}
                     increaseCounter={increaseCounter}

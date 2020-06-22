@@ -1,12 +1,12 @@
 import http from "./httpServices";
 import jwtDecode from "jwt-decode";
-let apiEndPoint = require("../../src/env");
+// let apiEndPoint = require("../../src/env");
 
 // apiEndPoint = "http://localhost:3900";
 // apiEndPoint = apiEndPoint + "/products";
 // apiEndPoint = "http://localhost:3900/users";
 
-apiEndPoint = "https://e-commerce-mern-power.herokuapp.com/auth";
+let apiEndPoint = "https://e-commerce-mern-power.herokuapp.com/auth";
 
 const tokenKey = "token";
 
